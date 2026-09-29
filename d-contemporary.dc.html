@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<script src="gallery-data.js"></script>
+<style>body{margin:0;background:#ffffff;color:#111111;font-family:'Schibsted Grotesk',system-ui,sans-serif;font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased}a{color:#111111;text-decoration:none}a:hover{color:#767676}img{display:block}</style>
+</helmet>
+<div style="min-height:100vh;display:flex;flex-direction:column">
+  <header style="position:sticky;top:0;z-index:10;background:rgba(255,255,255,0.96);backdrop-filter:blur(10px)">
+    <div style="max-width:1360px;margin:0 auto;padding:22px 40px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:24px">
+      <div onClick="{{ goHome }}" style="cursor:pointer;font-weight:500;font-size:13px;letter-spacing:0.28em">JC GALLERY</div>
+      <nav style="display:flex;gap:32px;font-size:13px">
+        <a href="#" onClick="{{ goArtist }}">Artists</a><a href="#" onClick="{{ goWork }}">Works</a><a href="#">Exhibitions</a><a href="#">About</a>
+      </nav>
+      <div style="text-align:right;font-size:13px;color:#767676">New York</div>
+    </div>
+  </header>
+
+  <main style="flex:1">
+    <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+      <section data-screen-label="Home" style="max-width:1360px;margin:0 auto;padding:24px 40px 0">
+        <div onClick="{{ heroWork.open }}" style="cursor:pointer;position:relative;background:#f4f4f2;height:min(72vh,720px);display:flex;align-items:center;justify-content:center">
+          <img src="{{ heroWork.img }}" alt="{{ heroWork.title }}" style="max-height:78%;max-width:70%;box-shadow:0 30px 60px -20px rgba(0,0,0,0.28)">
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px;padding:20px 0 0;font-size:13px">
+          <div><span style="color:#767676">Featured</span><br><span style="font-weight:500">{{ heroWork.artistName }}</span>, <em>{{ heroWork.title }}</em>, {{ heroWork.year }}</div>
+          <div style="color:#767676">{{ heroWork.medium }}<br>{{ heroWork.size }}</div>
+          <div style="text-align:right"><a href="#" onClick="{{ heroWork.open }}" style="border-bottom:1px solid #111;padding-bottom:2px">View work</a></div>
+        </div>
+      </section>
+
+      <section style="max-width:1360px;margin:0 auto;padding:140px 40px 0;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:24px">
+        <div style="grid-column:1 / span 3;min-width:160px;font-size:13px;color:#767676">About the gallery</div>
+        <p style="grid-column:4 / span 8;min-width:280px;margin:0;font-size:clamp(24px,2.6vw,36px);line-height:1.25;letter-spacing:-0.015em;text-wrap:pretty">At the JC Gallery, we nurture and propagate contemporary art that has to do with playful experimentation.</p>
+      </section>
+
+      <section style="max-width:1360px;margin:0 auto;padding:140px 40px 0;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:24px;align-items:start">
+        <div style="grid-column:1 / span 3;min-width:160px;font-size:13px;color:#767676">Artists</div>
+        <div style="grid-column:4 / span 5;min-width:260px">
+          <sc-for list="{{ artists }}" as="a" hint-placeholder-count="6">
+            <div onClick="{{ a.open }}" onMouseEnter="{{ a.hover }}" style="cursor:pointer;display:flex;justify-content:space-between;align-items:baseline;padding:14px 0;border-bottom:1px solid #ececea">
+              <span style="font-size:clamp(22px,2.2vw,30px);letter-spacing:-0.015em;opacity:{{ a.dim }}">{{ a.name }}</span>
+              <span style="font-size:12px;color:#767676">{{ a.count }}</span>
+            </div>
+          </sc-for>
+        </div>
+        <div style="grid-column:9 / span 4;min-width:220px;position:sticky;top:100px">
+          <img src="{{ hoverArtist.portrait }}" alt="{{ hoverArtist.name }}" style="width:100%;aspect-ratio:4/5;object-fit:cover">
+        </div>
+      </section>
+
+      <section style="max-width:1360px;margin:0 auto;padding:140px 40px 120px">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:40px;font-size:13px">
+          <span style="color:#767676">Selected works</span>
+          <a href="#" onClick="{{ goWork }}" style="border-bottom:1px solid #111;padding-bottom:2px">All works</a>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:64px 32px;align-items:end">
+          <sc-for list="{{ works }}" as="w" hint-placeholder-count="8">
+            <div onClick="{{ w.open }}" style="cursor:pointer">
+              <div style="height:260px;display:flex;align-items:flex-end;justify-content:center"><img src="{{ w.img }}" alt="{{ w.title }}" style="max-width:100%;max-height:100%"></div>
+              <div style="margin-top:16px;font-size:13px;line-height:1.45"><span style="font-weight:500">{{ w.artistName }}</span><br><em>{{ w.title }}</em></div>
+            </div>
+          </sc-for>
+        </div>
+      </section>
+    </sc-if>
+
+    <sc-if value="{{ isArtist }}" hint-placeholder-val="{{ false }}">
+      <section data-screen-label="Artist" style="max-width:1360px;margin:0 auto;padding:72px 40px 0">
+        <div style="font-size:13px;color:#767676;margin-bottom:12px">Artist</div>
+        <h1 style="margin:0;font-weight:400;font-size:clamp(44px,6vw,88px);line-height:1;letter-spacing:-0.035em">{{ artist.name }}</h1>
+        <div style="display:flex;gap:32px;margin-top:48px;border-bottom:1px solid #ececea;font-size:13px">
+          <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="3">
+            <span onClick="{{ t.pick }}" style="cursor:pointer;padding:0 0 14px;margin-bottom:-1px;border-bottom:1px solid {{ t.line }};color:{{ t.color }}">{{ t.label }}</span>
+          </sc-for>
+        </div>
+      </section>
+      <sc-if value="{{ tabWorks }}" hint-placeholder-val="{{ true }}">
+        <section style="max-width:1360px;margin:0 auto;padding:64px 40px 120px">
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:64px 32px;align-items:end">
+            <sc-for list="{{ artistWorks }}" as="w" hint-placeholder-count="4">
+              <div onClick="{{ w.open }}" style="cursor:pointer">
+                <div style="height:260px;display:flex;align-items:flex-end;justify-content:center"><img src="{{ w.img }}" alt="{{ w.title }}" style="max-width:100%;max-height:100%"></div>
+                <div style="margin-top:16px;font-size:13px;line-height:1.45"><em>{{ w.title }}</em><br><span style="color:#767676">{{ w.year }}</span></div>
+              </div>
+            </sc-for>
+          </div>
+          <sc-if value="{{ noArtistWorks }}" hint-placeholder-val="{{ false }}"><p style="color:#767676;margin:0">Works will be added soon.</p></sc-if>
+        </section>
+      </sc-if>
+      <sc-if value="{{ tabBio }}" hint-placeholder-val="{{ false }}">
+        <section style="max-width:1360px;margin:0 auto;padding:64px 40px 120px;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:24px">
+          <img src="{{ artist.portrait }}" alt="{{ artist.name }}" style="grid-column:1 / span 4;min-width:220px;width:100%;aspect-ratio:4/5;object-fit:cover">
+          <div style="grid-column:6 / span 6;min-width:280px">
+            <p style="margin:0 0 32px;font-size:22px;line-height:1.4;letter-spacing:-0.01em;text-wrap:pretty">{{ artist.statement }}</p>
+            <sc-for list="{{ bio }}" as="p" hint-placeholder-count="1"><p style="margin:0 0 16px;font-size:15px;line-height:1.7;color:#333;max-width:62ch;text-wrap:pretty">{{ p.t }}</p></sc-for>
+            <sc-if value="{{ artist.web }}" hint-placeholder-val="{{ false }}"><a href="#" style="font-size:13px;border-bottom:1px solid #111;padding-bottom:2px">{{ artist.web }}</a></sc-if>
+          </div>
+        </section>
+      </sc-if>
+      <sc-if value="{{ tabCv }}" hint-placeholder-val="{{ false }}">
+        <section style="max-width:1360px;margin:0 auto;padding:64px 40px 120px;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:24px">
+          <div style="grid-column:1 / span 3;min-width:160px;font-size:13px;color:#767676">Selected exhibitions</div>
+          <div style="grid-column:4 / span 8;min-width:280px;margin-bottom:56px">
+            <sc-for list="{{ exhibitions }}" as="r" hint-placeholder-count="8"><div style="display:grid;grid-template-columns:96px 1fr;gap:16px;padding:9px 0;border-bottom:1px solid #ececea"><span style="color:#767676">{{ r.y }}</span><span>{{ r.t }}</span></div></sc-for>
+          </div>
+          <div style="grid-column:1 / span 3;min-width:160px;font-size:13px;color:#767676">Education</div>
+          <div style="grid-column:4 / span 8;min-width:280px">
+            <sc-for list="{{ education }}" as="r" hint-placeholder-count="5"><div style="display:grid;grid-template-columns:96px 1fr;gap:16px;padding:9px 0;border-bottom:1px solid #ececea"><span style="color:#767676">{{ r.y }}</span><span>{{ r.t }}</span></div></sc-for>
+          </div>
+        </section>
+      </sc-if>
+    </sc-if>
+
+    <sc-if value="{{ isWork }}" hint-placeholder-val="{{ false }}">
+      <section data-screen-label="Artwork" style="max-width:1360px;margin:0 auto;padding:24px 40px 0">
+        <div style="background:#f4f4f2;height:min(76vh,800px);display:flex;align-items:center;justify-content:center">
+          <img src="{{ work.img }}" alt="{{ work.title }}" style="max-height:80%;max-width:72%;box-shadow:0 30px 60px -20px rgba(0,0,0,0.3)">
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:24px;padding:40px 0 0">
+          <div style="grid-column:1 / span 5;min-width:260px">
+            <a href="#" onClick="{{ openWorkArtist }}" style="font-size:15px;font-weight:500">{{ work.artistName }}</a>
+            <h1 style="margin:4px 0 0;font-weight:400;font-style:italic;font-size:clamp(30px,3.4vw,44px);line-height:1.1;letter-spacing:-0.02em">{{ work.title }}</h1>
+          </div>
+          <div style="grid-column:6 / span 4;min-width:220px;font-size:13px">
+            <sc-for list="{{ meta }}" as="m" hint-placeholder-count="4"><div style="display:grid;grid-template-columns:96px 1fr;padding:7px 0;border-bottom:1px solid #ececea"><span style="color:#767676">{{ m.k }}</span><span>{{ m.v }}</span></div></sc-for>
+          </div>
+          <div style="grid-column:10 / span 3;min-width:180px;display:flex;flex-direction:column;align-items:flex-end;gap:20px;font-size:13px">
+            <a href="#" style="background:#111;color:#fff;padding:12px 22px" style-hover="background:#333;color:#fff">Inquire</a>
+            <div style="display:flex;gap:20px;color:#767676"><span onClick="{{ prevWork }}" style="cursor:pointer">Previous</span><span>{{ work.num }} / {{ workTotal }}</span><span onClick="{{ nextWork }}" style="cursor:pointer">Next</span></div>
+          </div>
+        </div>
+      </section>
+      <section style="max-width:1360px;margin:0 auto;padding:140px 40px 120px">
+        <div style="font-size:13px;color:#767676;margin-bottom:40px">More works</div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:48px 32px;align-items:end">
+          <sc-for list="{{ more }}" as="w" hint-placeholder-count="4">
+            <div onClick="{{ w.open }}" style="cursor:pointer">
+              <div style="height:220px;display:flex;align-items:flex-end;justify-content:center"><img src="{{ w.img }}" alt="{{ w.title }}" style="max-width:100%;max-height:100%"></div>
+              <div style="margin-top:14px;font-size:13px;line-height:1.45"><span style="font-weight:500">{{ w.artistName }}</span><br><em>{{ w.title }}</em></div>
+            </div>
+          </sc-for>
+        </div>
+      </section>
+    </sc-if>
+  </main>
+
+  <footer style="border-top:1px solid #ececea">
+    <div style="max-width:1360px;margin:0 auto;padding:40px 40px 48px;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:24px;font-size:13px;color:#767676">
+      <span style="color:#111;font-weight:500;letter-spacing:0.28em">JC GALLERY</span>
+      <div>jay@jayjoshua.net<br>917-929-3133</div>
+      <div>Privacy Policy</div>
+      <div style="text-align:right">© JC Gallery 2026</div>
+    </div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;startPage&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;home&quot;,&quot;artist&quot;,&quot;work&quot;],&quot;default&quot;:&quot;home&quot;,&quot;tsType&quot;:&quot;'home'|'artist'|'work'&quot;}}">
+class Component extends DCLogic {
+  state = { page: this.props.startPage ?? 'home', id: null, hover: 'jay-chung', tab: 'works' };
+  componentDidMount() { if (!window.JCGView) this.t = setInterval(() => { if (window.JCGView) { clearInterval(this.t); this.forceUpdate(); } }, 50); }
+  componentDidUpdate(p, s) {
+    if (p.startPage !== this.props.startPage) this.setState({ page: this.props.startPage, id: null });
+    if (s.id !== this.state.id && this.state.page === 'artist' && this.state.tab !== 'works') this.setState({ tab: 'works' });
+  }
+  componentWillUnmount() { clearInterval(this.t); }
+  renderVals() {
+    if (!window.JCGView) return { isHome: true };
+    const v = window.JCGView(this);
+    const s = this.state;
+    v.artists = v.artists.map(a => ({ ...a, hover: () => this.setState({ hover: a.id }), dim: s.hover === a.id ? 1 : 0.45 }));
+    v.hoverArtist = v.artists.find(a => a.id === s.hover) || v.artists[0] || {};
+    const tabs = [['works', 'Works'], ['bio', 'Biography'], ['cv', 'CV']].filter(t => t[0] === 'works' || (t[0] === 'bio' ? v.hasBio : v.hasCv));
+    v.tabs = tabs.map(([k, label]) => ({ label, pick: () => this.setState({ tab: k }), line: s.tab === k ? '#111111' : 'transparent', color: s.tab === k ? '#111111' : '#767676' }));
+    v.tabWorks = s.tab === 'works'; v.tabBio = s.tab === 'bio'; v.tabCv = s.tab === 'cv';
+    v.noArtistWorks = !v.hasArtistWorks;
+    return v;
+  }
+}
+</script>
+</body>
+</html>
