@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JC Gallery — Chelsea, New York</title>
+<meta name="description" content="JC Gallery — contemporary art gallery in Chelsea, New York.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Syne:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          'primary': '#000000', 'on-primary': '#ffffff',
+          'secondary': '#5f5e5a', 'surface': '#f9f9f7',
+          'surface-container-lowest': '#ffffff', 'surface-container-low': '#f4f4f2',
+          'surface-container': '#eeeeec', 'surface-canvas': '#ffffff',
+          'on-surface': '#1a1c1b', 'on-surface-variant': '#444748',
+          'inverse-surface': '#2f3130', 'gallery-white': '#FBFBFA',
+          'muted-subtext': '#8C8B85', 'stone-border': '#E5E5E2'
+        },
+        spacing: {
+          'space-xs': '0.25rem', 'space-sm': '0.5rem', 'space-md': '1rem', 'space-lg': '2rem',
+          'space-xl': '3.5rem', 'space-2xl': '6rem', 'margin-mobile': '1.25rem', 'margin': '4rem', 'gutter': '2rem'
+        },
+        fontFamily: {
+          'display-hero': ['Syne'], 'headline-lg': ['Syne'], 'headline-md': ['Syne'], 'headline-sm': ['Syne'],
+          'body-lg': ['Inter'], 'body-md': ['Inter'], 'body-sm': ['Inter'], 'label-caps': ['Inter'], 'label-regular': ['Inter']
+        },
+        fontSize: {
+          'headline-lg': ['32px', { lineHeight: '42px', letterSpacing: '0.12em', fontWeight: '600' }],
+          'headline-md': ['22px', { lineHeight: '30px', letterSpacing: '0.08em', fontWeight: '500' }],
+          'label-caps': ['11px', { lineHeight: '16px', letterSpacing: '0.18em', fontWeight: '600' }],
+          'body-lg': ['18px', { lineHeight: '28px', letterSpacing: '-0.01em', fontWeight: '300' }],
+          'body-md': ['15px', { lineHeight: '24px', letterSpacing: '0em', fontWeight: '400' }]
+        }
+      }
+    }
+  };
+</script>
+<style>
+  html, body { margin: 0; padding: 0; }
+  body { overscroll-behavior: none; }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition-duration: 0s !important; }
+  }
+</style>
+</head>
+<body class="bg-surface text-on-surface font-body-md text-body-md antialiased selection:bg-primary selection:text-gallery-white">
+
+<header class="fixed top-0 left-0 w-full z-50 bg-gallery-white/95 backdrop-blur-md border-b border-stone-border">
+  <div class="border-b border-stone-border/60 bg-surface-container-low">
+    <div class="max-w-[1600px] mx-auto px-margin-mobile md:px-margin h-8 flex items-center justify-between font-label-caps text-[10px] tracking-[0.24em] uppercase text-secondary">
+      <span class="truncate">524 West 24th Street, Chelsea, New York</span>
+      <div class="flex items-center gap-space-lg shrink-0 pl-space-md">
+        <span class="hidden sm:inline">Tue–Sat 10AM–6PM</span>
+        <a href="tel:+19179293133" class="hover:text-primary">Tel 917-929-3133</a>
+      </div>
+    </div>
+  </div>
+  <div class="h-20 max-w-[1600px] mx-auto px-margin-mobile md:px-margin flex items-center justify-between">
+    <a class="flex flex-col text-left" href="#top">
+      <span class="font-headline-md text-headline-md tracking-[0.22em] text-primary uppercase leading-tight font-semibold">JC Gallery</span>
+      <span class="font-label-caps text-[10px] text-muted-subtext tracking-[0.28em] uppercase mt-0.5">Chelsea · New York</span>
+    </a>
+    <nav class="hidden lg:flex items-center gap-space-xl font-label-caps text-label-caps tracking-[0.22em] uppercase">
+      <a aria-current="page" class="py-1 text-primary font-semibold border-b border-primary" href="#artists">Artists</a>
+      <a class="text-on-surface-variant hover:text-primary transition-colors py-1" href="#top">Artworks</a>
+      <a class="text-on-surface-variant hover:text-primary transition-colors py-1" href="#exhibitions">Exhibitions</a>
+      <a class="text-on-surface-variant hover:text-primary transition-colors py-1" href="#about">About</a>
+      <a class="text-on-surface-variant hover:text-primary transition-colors py-1" href="#contact">Contact</a>
+    </nav>
+    <div class="flex items-center gap-space-sm">
+      <a class="hidden sm:inline-block px-space-md py-2 bg-primary text-on-primary font-label-caps text-label-caps tracking-[0.18em] uppercase hover:bg-inverse-surface transition-colors" href="#contact">Private Viewing</a>
+      <button id="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav" class="lg:hidden w-10 h-10 flex items-center justify-center text-primary">
+        <span class="material-symbols-outlined">menu</span>
+      </button>
+    </div>
+  </div>
+  <nav id="mobile-nav" class="hidden lg:hidden border-t border-stone-border bg-gallery-white">
+    <div class="px-margin-mobile py-space-md flex flex-col font-label-caps text-label-caps tracking-[0.22em] uppercase divide-y divide-stone-border">
+      <a class="py-3 text-primary" href="#artists">Artists</a>
+      <a class="py-3 text-on-surface-variant" href="#top">Artworks</a>
+      <a class="py-3 text-on-surface-variant" href="#exhibitions">Exhibitions</a>
+      <a class="py-3 text-on-surface-variant" href="#about">About</a>
+      <a class="py-3 text-on-surface-variant" href="#contact">Contact</a>
+      <a class="py-3 text-primary sm:hidden" href="#contact">Private Viewing →</a>
+    </div>
+  </nav>
+</header>
+
+<main id="top" class="w-full pt-[7rem] bg-surface">
+
+  <!-- HERO -->
+  <section class="w-full max-w-[1600px] mx-auto px-margin-mobile md:px-margin pt-space-xl pb-space-2xl">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-space-xl lg:gap-gutter items-center">
+      <div class="lg:col-span-5 flex flex-col justify-center lg:pr-space-lg">
+        <div class="font-label-caps text-label-caps uppercase text-muted-subtext tracking-[0.28em] mb-space-sm">Contemporary Art · Chelsea, New York</div>
+        <h1 class="font-display-hero text-headline-lg lg:text-[48px] lg:leading-[56px] tracking-[0.14em] uppercase text-primary mb-space-md font-bold">JC Gallery</h1>
+        <p class="font-body-lg text-body-lg text-secondary leading-relaxed mb-space-xl max-w-lg">
+          Dedicated to vanguard contemporary art anchored in playful experimentation, luminous materiality, and cross-cultural dialogue.
+        </p>
+        <div class="flex flex-wrap items-center gap-space-md">
+          <a class="px-space-lg py-3 bg-primary text-on-primary font-label-caps text-label-caps tracking-[0.2em] uppercase hover:bg-inverse-surface transition-colors inline-flex items-center gap-space-xs" href="#artists">
+            <span>Explore Oeuvre</span>
+            <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+          </a>
+          <a class="px-space-md py-3 border border-stone-border text-primary font-label-caps text-label-caps tracking-[0.2em] uppercase hover:border-primary transition-colors" href="#exhibitions">Current Season</a>
+        </div>
+      </div>
+
+      <div class="lg:col-span-7 flex flex-col">
+        <div class="relative w-full aspect-[4/3] md:aspect-[16/11] bg-surface-container-low overflow-hidden shadow-[0_2px_12px_rgba(0,0,0,0.04)]" aria-roledescription="carousel" aria-label="Featured artworks">
+          <div class="relative w-full h-full" id="hero-slider"></div>
+          <div class="absolute inset-y-0 left-0 flex items-center pl-3">
+            <button aria-label="Previous slide" class="w-9 h-9 bg-gallery-white/90 hover:bg-gallery-white text-primary flex items-center justify-center transition-colors shadow-sm" id="slider-prev">
+              <span class="material-symbols-outlined text-[18px]">west</span>
+            </button>
+          </div>
+          <div class="absolute inset-y-0 right-0 flex items-center pr-3">
+            <button aria-label="Next slide" class="w-9 h-9 bg-gallery-white/90 hover:bg-gallery-white text-primary flex items-center justify-center transition-colors shadow-sm" id="slider-next">
+              <span class="material-symbols-outlined text-[18px]">east</span>
+            </button>
+          </div>
+        </div>
+        <div class="flex flex-col sm:flex-row sm:items-baseline justify-between pt-space-sm gap-1 border-t border-stone-border mt-3 text-secondary" aria-live="polite">
+          <div>
+            <span class="font-headline-sm text-sm uppercase tracking-[0.1em] text-primary font-semibold" id="slide-caption-title"></span>
+            <span class="text-stone-border mx-2">·</span>
+            <span class="font-label-regular text-xs text-secondary" id="slide-caption-artist"></span>
+            <span class="text-stone-border mx-2">·</span>
+            <span class="font-label-regular text-xs text-muted-subtext" id="slide-caption-medium"></span>
+          </div>
+          <a class="font-label-caps text-[11px] uppercase tracking-[0.2em] text-primary hover:text-secondary inline-flex items-center gap-1 shrink-0" href="#contact">
+            <span>Acquisition Dossier</span>
+            <span class="material-symbols-outlined text-[12px]">arrow_forward</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REPRESENTED ARTISTS -->
+  <section id="artists" class="scroll-mt-28 w-full max-w-[1600px] mx-auto px-margin-mobile md:px-margin py-space-2xl border-t border-stone-border">
+    <div class="flex flex-wrap gap-2 items-baseline justify-between pb-space-md border-b border-primary mb-space-xl">
+      <h2 class="font-headline-lg text-headline-lg uppercase tracking-[0.16em] text-primary font-semibold">Represented Artists</h2>
+      <a class="font-label-caps text-label-caps tracking-[0.2em] uppercase text-primary hover:text-secondary transition-colors" href="#artists">View Full Roster →</a>
+    </div>
+    <div id="artist-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-gutter gap-y-space-xl"></div>
+  </section>
+
+  <!-- UPCOMING EXHIBITIONS -->
+  <section id="exhibitions" class="scroll-mt-28 w-full max-w-[1600px] mx-auto px-margin-mobile md:px-margin border-t border-stone-border pt-space-lg pb-space-xl">
+    <div class="flex flex-wrap gap-2 items-baseline justify-between pb-space-sm border-b border-primary mb-space-md">
+      <h2 class="font-headline-md text-base uppercase tracking-[0.16em] text-primary font-semibold">Upcoming Exhibitions</h2>
+      <a class="font-label-caps text-xs tracking-[0.18em] uppercase text-primary hover:text-secondary transition-colors" href="#exhibitions">View All Exhibitions →</a>
+    </div>
+    <div id="exhibition-list" class="flex flex-col border-t border-stone-border divide-y divide-stone-border"></div>
+  </section>
+</main>
+
+<footer id="contact" class="w-full bg-gallery-white border-t border-stone-border">
+  <div id="about" class="max-w-[1600px] mx-auto px-margin-mobile md:px-margin py-space-2xl grid grid-cols-1 md:grid-cols-12 gap-gutter">
+    <div class="md:col-span-5 flex flex-col justify-between md:pr-space-lg">
+      <div>
+        <h4 class="font-headline-sm text-base uppercase tracking-[0.18em] text-primary mb-1 font-semibold">JC Gallery</h4>
+        <p class="font-label-caps text-xs text-muted-subtext tracking-[0.24em] uppercase mb-space-md">Chelsea · New York</p>
+        <p class="font-body-sm text-xs text-secondary max-w-sm leading-relaxed">Contemporary art gallery dedicated to vanguard solo presentations, institutional acquisitions, and private patron curation.</p>
+      </div>
+      <div class="mt-space-lg font-label-caps text-[11px] text-muted-subtext space-y-1 uppercase">
+        <div>524 West 24th Street, New York, NY 10011</div>
+        <div>Tel: <a class="hover:text-primary" href="tel:+19179293133">917-929-3133</a> · <a class="hover:text-primary" href="mailto:jay@jayjoshua.net">jay@jayjoshua.net</a></div>
+      </div>
+    </div>
+    <div class="md:col-span-3 flex flex-col border-t md:border-t-0 md:border-l border-stone-border pt-space-lg md:pt-0 md:pl-space-lg">
+      <h5 class="font-label-caps text-xs tracking-[0.2em] uppercase text-primary mb-space-md font-semibold">Index</h5>
+      <div class="flex flex-col space-y-2 font-label-caps text-[11px] tracking-[0.14em] uppercase text-secondary">
+        <a class="hover:text-primary transition-colors" href="#artists">Represented Artists</a>
+        <a class="hover:text-primary transition-colors" href="#top">Artworks</a>
+        <a class="hover:text-primary transition-colors" href="#exhibitions">Exhibitions</a>
+        <a class="hover:text-primary transition-colors" href="#about">Curatorial Philosophy</a>
+        <a class="hover:text-primary transition-colors" href="#contact">Contact &amp; Salon</a>
+      </div>
+    </div>
+    <div class="md:col-span-4 flex flex-col border-t md:border-t-0 md:border-l border-stone-border pt-space-lg md:pt-0 md:pl-space-lg">
+      <h5 class="font-label-caps text-xs tracking-[0.2em] uppercase text-primary mb-space-xs font-semibold">Newsletter</h5>
+      <p class="font-body-sm text-xs text-secondary mb-space-md">Curated previews and exhibition vernissages.</p>
+      <form id="newsletter" class="flex flex-col space-y-2">
+        <label for="nl-email" class="sr-only">Email address</label>
+        <input id="nl-email" required class="w-full px-space-md py-2.5 bg-surface-canvas border border-stone-border focus:border-primary focus:ring-0 focus:outline-none font-label-caps text-xs text-primary placeholder:text-muted-subtext rounded-none transition-colors" placeholder="EMAIL ADDRESS" type="email">
+        <button class="w-full py-2.5 bg-primary text-on-primary font-label-caps text-xs tracking-[0.18em] uppercase hover:bg-inverse-surface transition-colors rounded-none" type="submit">Subscribe</button>
+        <p id="nl-msg" class="hidden font-label-caps text-[11px] tracking-[0.14em] uppercase text-secondary pt-1">Thank you — you're on the list.</p>
+      </form>
+    </div>
+  </div>
+  <div class="border-t border-stone-border">
+    <div class="max-w-[1600px] mx-auto px-margin-mobile md:px-margin py-space-md flex flex-col sm:flex-row items-center justify-between gap-space-sm font-label-caps text-[10px] tracking-[0.2em] uppercase text-muted-subtext">
+      <div>© <span id="year">2025</span> JC Gallery. All rights reserved.</div>
+      <div class="flex items-center gap-space-lg">
+        <a class="hover:text-primary transition-colors" href="#">Privacy Policy</a>
+        <a class="hover:text-primary transition-colors" href="#">Terms</a>
+        <a class="hover:text-primary transition-colors" href="#">Colophon</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  const U = 'https://jcgalleryny.com/wp-content/uploads/';
+
+  const slides = [
+    { img: U + '2026/05/Diary-of-times-Mixed-media-in-resin-24x24-in-2026.jpg', title: 'Diary of Times', artist: 'Jay Chung', medium: 'Mixed media in resin on canvas, 2026' },
+    { img: U + '2024/07/Share-Your-Love-1050x658.jpg', title: 'Share Your Love', artist: 'Sarah Helqa', medium: 'Mixed media and oil pastel, 2024' },
+    { img: U + '2024/12/gregoireimg06-1000x658.webp', title: 'Allegory Of The Creation', artist: 'Gregoire Devin', medium: 'Enamel on ceramic sculpture, 2024' }
+  ];
+
+  const artists = [
+    { name: 'Jay Chung', img: U + '2024/04/jaychung.jpeg', note: 'Painting & Ceramics · New York' },
+    { name: 'Sarah Helqa', img: U + '2024/07/sarahh-740x474.jpg', note: 'Figurative & Vessel Sculpture' },
+    { name: 'Hoya Chung', img: U + '2024/04/hoya-740x474.jpeg', note: 'Stratified Collage & Mixed Media' },
+    { name: 'Soo Kim', img: U + '2024/04/sookim-740x474.jpg', note: 'Tonal Portraiture & Wash' },
+    { name: 'Gregoire Devin', img: U + '2023/12/gregoire-740x474.jpg', note: 'Neo-Totem Sculpture & Enamel · Paris' },
+    { name: 'Sehyun Jeon', img: U + '2024/04/sehyun-740x474.jpg', note: 'Minimalist Line & Reductionism · Seoul' }
+  ];
+
+  const exhibitions = [
+    { dates: 'Apr 18 – May 30, 2025', title: 'Playful Experimentation', note: 'Jay Chung, Sarah Helqa & Grégoire Devin — Main Hall', cta: 'RSVP' },
+    { dates: 'Jun 12 – Jul 25, 2025', title: 'Hoya Chung: Stratified Urban Echoes', note: 'Solo Presentation — Room II · Collage & Plaster', cta: 'Details' },
+    { dates: 'Aug 05 – Sep 15, 2025', title: 'Silent Observers', note: 'Soo Kim & Sehyun Jeon — Minimalist Introspections', cta: 'Details' }
+  ];
+
+  const esc = s => s.replace(/&/g, '&amp;').replace(/</g, '&lt;');
+
+  // Hero slider
+  const slider = document.getElementById('hero-slider');
+  slider.innerHTML = slides.map((s, i) => `
+    <div class="slide absolute inset-0 transition-opacity duration-700 flex items-center justify-center bg-surface-container-lowest ${i === 0 ? 'opacity-100' : 'opacity-0 pointer-events-none'}" aria-hidden="${i !== 0}">
+      <img alt="${esc(s.artist)} — ${esc(s.title)}" class="w-full h-full object-cover select-none" src="${s.img}" ${i ? 'loading="lazy"' : ''}>
+    </div>`).join('');
+
+  const slideEls = slider.querySelectorAll('.slide');
+  const cap = {
+    title: document.getElementById('slide-caption-title'),
+    artist: document.getElementById('slide-caption-artist'),
+    medium: document.getElementById('slide-caption-medium')
+  };
+  let current = 0, timer = null;
+
+  function show(index) {
+    current = (index + slideEls.length) % slideEls.length;
+    slideEls.forEach((el, i) => {
+      const on = i === current;
+      el.classList.toggle('opacity-100', on);
+      el.classList.toggle('opacity-0', !on);
+      el.classList.toggle('pointer-events-none', !on);
+      el.setAttribute('aria-hidden', String(!on));
+    });
+    cap.title.textContent = slides[current].title;
+    cap.artist.textContent = slides[current].artist;
+    cap.medium.textContent = slides[current].medium;
+  }
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function restart() {
+    clearInterval(timer);
+    if (!reduceMotion) timer = setInterval(() => show(current + 1), 6000);
+  }
+
+  document.getElementById('slider-prev').addEventListener('click', () => { show(current - 1); restart(); });
+  document.getElementById('slider-next').addEventListener('click', () => { show(current + 1); restart(); });
+  show(0);
+  restart();
+
+  // Artist roster
+  document.getElementById('artist-grid').innerHTML = artists.map(a => `
+    <a class="group flex flex-col" href="#artists">
+      <div class="relative w-full aspect-square overflow-hidden bg-surface-container mb-space-sm">
+        <img alt="${esc(a.name)}" loading="lazy" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" src="${a.img}">
+      </div>
+      <div class="flex items-baseline justify-between">
+        <h3 class="font-headline-md text-lg uppercase tracking-[0.08em] text-primary font-semibold group-hover:text-secondary transition-colors">${esc(a.name)}</h3>
+        <span class="font-label-caps text-[11px] uppercase tracking-[0.16em] text-muted-subtext group-hover:text-primary transition-colors">Profile →</span>
+      </div>
+      <p class="font-label-caps text-xs text-secondary tracking-[0.14em] uppercase mt-0.5">${esc(a.note)}</p>
+    </a>`).join('');
+
+  // Exhibitions
+  document.getElementById('exhibition-list').innerHTML = exhibitions.map(e => `
+    <div class="py-3 flex flex-col md:flex-row md:items-center justify-between gap-2 md:gap-4 group hover:bg-surface-container-low/50 transition-colors px-2">
+      <div class="md:w-1/4 font-label-caps text-[11px] tracking-[0.2em] uppercase text-muted-subtext shrink-0">${esc(e.dates)}</div>
+      <div class="md:w-7/12 min-w-0 flex flex-col md:flex-row md:items-baseline gap-1 md:gap-3">
+        <h3 class="font-headline-sm text-sm uppercase tracking-[0.08em] text-primary font-semibold group-hover:text-secondary transition-colors md:whitespace-nowrap">${esc(e.title)}</h3>
+        <p class="font-label-caps text-[11px] text-muted-subtext tracking-[0.08em] uppercase md:truncate">${esc(e.note)}</p>
+      </div>
+      <div class="md:w-1/6 flex md:justify-end items-center">
+        <a href="#contact" class="font-label-caps text-[11px] uppercase tracking-[0.16em] text-primary hover:text-secondary transition-colors">${e.cta} →</a>
+      </div>
+    </div>`).join('');
+
+  // Mobile menu
+  const toggle = document.getElementById('menu-toggle');
+  const mobileNav = document.getElementById('mobile-nav');
+  toggle.addEventListener('click', () => {
+    const open = mobileNav.classList.toggle('hidden') === false;
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.querySelector('span').textContent = open ? 'close' : 'menu';
+  });
+  mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    mobileNav.classList.add('hidden');
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.querySelector('span').textContent = 'menu';
+  }));
+
+  // Newsletter (front-end only for now)
+  document.getElementById('newsletter').addEventListener('submit', e => {
+    e.preventDefault();
+    e.target.reset();
+    document.getElementById('nl-msg').classList.remove('hidden');
+  });
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+})();
+</script>
+</body>
+</html>
